@@ -5,45 +5,49 @@ app = QApplication([])
 class okno(QWidget):
     def __init__(self):
         super().__init__()
-        self.label = QLabel('Запоминаем число.')
+        self.label = QLabel('')
         self.input = QLabel('')
-        self.znak = ''
-    
         self.btn1 = QPushButton('Сброс')
-        self.btn1 = QPushButton('lambada')
+        self.btn1 = QPushButton(lambada: self.imput.setText(''))
         self.btn2 = QPushButton('Сброс всего')   
-        self.btn4 = QPushButton('/')
+        self.btn2.clicked.conect(self.obnul)
+        self.btn3 = QPushButton('Стереть')
+        self.btn3 = QPushButton(lambada: self.imput.setText(self.input.text()[:-1:]))
+        self.btn4 = btn_znak('/')
+          
+        self.btn5 = btn_num('7')
+        self.btn6 = btn_num('8')
+        self.btn7 = btn_num('9')
+        self.btn8 = btn_num('*')
 
-        self.btn5 = QPushButton('7')
-        self.btn6 = QPushButton('8')
-        self.btn7 = QPushButton('9')
-        self.btn8 = QPushButton('*')
-            #
-        self.btn9 = QPushButton('4')
-        self.btn10 = QPushButton('5')
-        self.btn11 = QPushButton('6')
-        self.btn12 = QPushButton('-')
+        self.btn9 = btn_num('4')
+        self.btn10 = btn_num('5')
+        self.btn11 = btn_num('6')
+        self.btn12 = btn_num('-')
 
-        self.btn13 = QPushButton('1')
-        self.btn14 = QPushButton('2')
-        self.btn15 = QPushButton('3')
-        self.btn16 = QPushButton('+')
+        self.btn13 = btn_num('1')
+        self.btn14 = btn_num('2')
+        self.btn15 = btn_num('3')
+        self.btn16 = btn_znak('+')
 
         self.btn17 = QPushButton('+-')
-        self.btn18 = QPushButton('0')
-        self.btn19 = QPushButton(',')
+        self.btn17.clicked.connect(lambada: self.imput.setText(str(int(self.input.text())*-1)))
+        self.btn18 = btn_num('0')
+        self.btn19 = btn_num('.')
         self.btn20 = QPushButton('=')
-        self.btn21 = QPushButton('+-')
-
+        self.btn20.clicked.connect(self.ravno)
+        self.btn21 = QPushButton('%')
+        self.btn21.clicked.connect(self.procenti)
         self.v1 = QVBoxLayout()
-        self.h1 = QHBoxLayout()
-        self.h2 = QHBoxLayout()
-        self.h3 = QHBoxLayout()
-        self.h4 = QHBoxLayout()
-        self.h5 = QHBoxLayout()
-        self.h6 = QHBoxLayout()
-        self.h7 = QHBoxLayout()
-        
+        self.v1 = QVBoxLayout()
+        self.v2 = QVBoxLayout()
+        self.v3 = QVBoxLayout()
+        self.v4 = QVBoxLayout()
+        self.v5 = QVBoxLayout()
+        self.v6 = QVBoxLayout()
+        self.v7 = QVBoxLayout()
+        self.v8 = QVBoxLayout()
+
         self.h1.addWidget(self.label)
 
         self.h2.addWidget(self.input)
@@ -73,20 +77,16 @@ class okno(QWidget):
         self.h7.addWidget(self.btn19)
         self.h7.addWidget(self.btn20)
         #
+        self.h1.addWidget(self.btn21)
         self.v1.addLayout(self.h1)
-        self.v1.addLayout(self.h2)
         self.v1.addLayout(self.h3)
         self.v1.addLayout(self.h4)
         self.v1.addLayout(self.h5)
         self.v1.addLayout(self.h6)
         self.v1.addLayout(self.h7)
+        self.v1.addLayout(self.h8)
         self.setLayout(self.v1)
-        self.show()
-    def obnul(self):
-        self.label.setText('')
-        self.input.setText('')
-        self.znak = ''
-
+        self.setStyleSheet()
 
 class btn_num(QPushButton):
     def__init__(self,text):
@@ -105,10 +105,24 @@ class btn_znak(QPushButton):
         okno1.label.setText(okno1.input.text())
         okno1.input.setText('')
     
-okno1 = okno()
+        self.show()
+    def obnul(self):
+        self.label.setText('')
+        self.input.setText('')
+        self.znak = ''
+    def ravno(self):
+        try:
+            a = eval(self.label.text() + self.znak + self.input.text())
+            self.input.setText(str(a))
+        except:
+            self.obnul()
 
-app.exec_()
-print(eva1('2.13 + 11.1'))
+    def procenti(self):
+        x = float(self.label.text())
+        a = float(self)
+
+
+
 
 def procenti(self):
     x = float(self.label.text())
